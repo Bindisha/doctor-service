@@ -12,7 +12,7 @@ pipeline {
 
 
     parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build')
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Branch to build')
     }
 
     triggers {
@@ -45,7 +45,7 @@ pipeline {
                     if (env.BRANCH_NAME == 'main') {
                         checkout scm
                     } else {
-                        checkout([$class: 'GitSCM', branches: [[name: "*/${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/sachin19927/flightservice.git']]])
+                        checkout([$class: 'GitSCM', branches: [[name: "*/${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/sachin19927/doctor-service.git']]])
                     }
                 }
             }
