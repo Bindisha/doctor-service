@@ -1,0 +1,76 @@
+<configuration>
+
+    <!-- Retrieve the application name -->
+    <springProperty name="appName" source="spring.application.name"/>
+
+    <!-- Define the log file location and name -->
+    <property name="LOG_FILE" value="logs/${appName}.log"/>
+    <springProfile name="default">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp>
+                        <timeZone>UTC</timeZone>
+                    </timestamp>
+                    <pattern>
+                        <pattern>
+                            {
+                              "traceId": "%X{traceId}",
+                              "spanId": "%X{spanId}",
+                              "level": "%level",
+                              "logger": "%logger{20}",
+                              "thread": "%thread",
+                              "message": "%message",
+                              "context": "%contextName",
+                              "exception": "%exception"
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+        </appender>
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_FILE}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>logs/${appName}-%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+           <destination>localhost:5044</destination>
+            <!-- <destination>3.109.189.129:5044</destination>  -->
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp>
+                        <timeZone>UTC</timeZone>
+                    </timestamp>
+                    <pattern>
+                        <pattern>
+                            {
+                              "traceId": "%X{traceId}",
+                              "spanId": "%X{spanId}",
+                              "level": "%level",
+                              "logger": "%logger{20}",
+                              "thread": "%thread",
+                              "message": "%message",
+                              "context": "%contextName",
+                              "exception": "%exception"
+                            }
+                        </pattern>
+                    </pattern>
+                </providers>
+            </encoder>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+           <!-- <appender-ref ref="LOGSTASH" />-->
+        </root>
+    </springProfile>
+</configuration>
