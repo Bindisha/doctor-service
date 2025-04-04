@@ -45,7 +45,7 @@ pipeline {
                     if (env.BRANCH_NAME == 'main') {
                         checkout scm
                     } else {
-                        checkout([$class: 'GitSCM', branches: [[name: "*/${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/sachin19927/doctor-service.git']]])
+                        checkout([$class: 'GitSCM', branches: [[name: "*/${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/Bindisha/doctor-service.git']]])
                     }
                 }
             }

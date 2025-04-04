@@ -6,8 +6,8 @@ spring:
     name: doctor-service
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:15432}/${DB_NAME:postgres_docker_db}?currentSchema=${DB_SCHEMA:hsm-doctor}
-    username: ${DB_USER:sachin19927}
-    password: ${DB_PASSWORD:Sachin@123}
+    username: ${DB_USER:bindisha0101}
+    password: ${DB_PASSWORD:bindisha@123}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
