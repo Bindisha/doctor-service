@@ -25,10 +25,10 @@ pipeline {
         ECR_REPO_NAME = 'cicd/doctor-service'
         IMAGE_TAG = "${env.BRANCH_NAME}-${env.BUILD_ID}"
         EC2_USER = 'ec2-user' // Change if using Ubuntu (e.g., 'ubuntu')
-        EC2_HOST = 'ec2-3-109-4-202.ap-south-1.compute.amazonaws.com'
+        EC2_HOST = 'ec2-3-111-171-42.ap-south-1.compute.amazonaws.com'
         SSH_KEY = '/var/tmp/bindisha0101-db-jar-key1.pem'
         PORT_NO = '9096'
-        DB_HOST = '3.109.4.202'
+        DB_HOST = '3.111.171.42'
         DB_PORT = '15432'
         DB_NAME = 'postgres_docker_db'
         DB_USER = 'bindisha0101'
